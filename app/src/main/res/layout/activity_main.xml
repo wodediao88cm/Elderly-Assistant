@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:id="@+id/main_one"
+        android:textColor="#FF000000"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:gravity="center_horizontal"
+        android:text="欢迎来到老人小助手"/>
+
+    <Button
+        android:id="@+id/button_main_1"
+        android:layout_width="265dp"
+        android:layout_height="140dp"
+        android:text="一键通"
+        android:textSize="30sp"
+        android:gravity="left"></Button>
+    <Button
+        android:layout_width="265dp"
+        android:id="@+id/button_main_2"
+        android:layout_height="140dp"
+        android:text="健康监测"
+        android:textSize="30sp"
+        android:gravity="left"></Button>
+    <Button
+        android:layout_width="265dp"
+        android:layout_height="140dp"
+        android:id="@+id/button_main_3"
+        android:text="找寻"
+        android:textSize="30sp"
+        android:gravity="left"></Button>
+    <Button
+        android:layout_width="265dp"
+        android:layout_height="140dp"
+        android:id="@+id/button_main_4"
+        android:text="语音识别"
+        android:textSize="30sp"
+        android:gravity="left"></Button>
+
+
+</LinearLayout>
+    
+    
