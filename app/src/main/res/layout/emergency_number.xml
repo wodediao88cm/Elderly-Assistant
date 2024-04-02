@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/emergency_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入紧急电话号码"
+        android:inputType="phone"
+        android:maxLength="11" />
+
+    <Button
+        android:id="@+id/button_sava"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="保存"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        tools:ignore="RtlHardcoded" />
+</LinearLayout>

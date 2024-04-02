@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_date"
+        android:text="Tomorrow"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:layout_margin="30dp"/>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp"
+            android:gravity="top|center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_max_temp"
+                android:text="26℉"
+                android:textSize="50dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detail_min_temp"
+                android:text="14°"
+                android:textSize="40dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="top|center"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/detail_icon"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/a100"
+                />
+            <TextView
+                android:id="@+id/detail_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:text="Sun"
+                android:layout_marginTop="-10dp"/>
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_humidity"
+        android:text="Humidity: 78 %"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_pressure"
+        android:text="Pressure: 1018 hPa"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_wind"
+        android:text="Wind: 3 km/h SE"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:layout_marginLeft="15dp"/>
+</LinearLayout>

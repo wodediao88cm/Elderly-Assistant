@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="unit_entries">
+        <item>摄氏度</item>
+        <item>华氏度</item>
+    </string-array>
+    <string-array name="unit_entries_value">
+        <item>sheshidu</item>
+        <item>huashidu</item>
+    </string-array>
+</resources>

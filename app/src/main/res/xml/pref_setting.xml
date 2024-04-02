@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="unit"
+        android:title="Temperature Units"
+        android:entries="@array/unit_entries"
+        android:entryValues="@array/unit_entries_value"
+        android:defaultValue="sheshidu"
+        android:dialogTitle="温度单位"
+        android:summary="摄氏度"
+        />
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="notification"
+        android:switchTextOff="Disabled"
+        android:switchTextOn="Enabled"
+        android:summary="Enabled"
+        android:title="Weather Notification" />
+</PreferenceScreen>
