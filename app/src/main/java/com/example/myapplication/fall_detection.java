@@ -30,10 +30,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.baidu.location.BDAbstractLocationListener;
-import com.baidu.location.BDLocation;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.example.myapplication.ml.FallModel1;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -73,9 +69,7 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
     private Dbhelper Dbhelper;
     private BottomNavigationView bottomNavigationView;
 
-    public LocationClient mLocationClient = null;
-    private MyLocationListener myListener = new MyLocationListener();
-    public String addr;
+
 
 
     @Override
@@ -85,15 +79,7 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
 
 
 
-        mLocationClient = new LocationClient(getApplicationContext());
-        //声明LocationClient类
-        mLocationClient.registerLocationListener(myListener);
-        //注册监听函数
-        LocationClientOption option = new LocationClientOption();
-        option.setIsNeedAddress(true);
-        option.setNeedNewVersionRgc(true);
-        mLocationClient.setLocOption(option);
-        mLocationClient.start();
+
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true);
@@ -333,16 +319,7 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
     }
 
 
-    /**
-     * 用于获取设备的地理位置信息并触发发送短信的操作
-     */
-    public class MyLocationListener extends BDAbstractLocationListener{
-        @Override
-        public void onReceiveLocation(BDLocation location){
-            addr = location.getAddrStr();    //获取详细地址信息
 
-        }
-    }
 
 
 
@@ -353,8 +330,9 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
         SharedPreferences preferences = getSharedPreferences("emergency_setting", MODE_PRIVATE);
         String savedEmergencyNumber = preferences.getString("emergency_number", "");
         try {
+            String loca = GlobalData.getInstance().getLoca();
             SmsManager smsManager= SmsManager.getDefault();
-            String message ="您家中的长辈疑似发生了跌倒情况，请尽快联系确认！地址为:"+addr;
+            String message ="您家中的长辈疑似发生了跌倒情况，请尽快联系确认！地址为:"+loca;
             StringBuffer smsBody = new StringBuffer();
             //smsBody.append(Uri.parse(message));
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
@@ -372,20 +350,6 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
 
     }
 
-//    public void callEmergence(View view){
-//
-//        // 从SharedPreferences中获取保存的电话号码
-//        SharedPreferences preferences = getSharedPreferences("emergency_setting", MODE_PRIVATE);
-//        String savedEmergencyNumber = preferences.getString("emergency_number", "");
-//        if (!savedEmergencyNumber.isEmpty()) {
-//            // 调用系统方法拨打电话
-//            Intent intent = new Intent();
-//            intent.setAction(Intent.ACTION_CALL);
-//            intent.setData(Uri.parse("tel:" + savedEmergencyNumber));
-//            startActivity(intent);
-//        }
-//
-//    }
 
     public void addRingtone(MediaPlayer player){
 

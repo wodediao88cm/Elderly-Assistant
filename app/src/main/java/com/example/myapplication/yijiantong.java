@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.gesture.Gesture_MainActivity;
+
 public class yijiantong extends AppCompatActivity {
 
     @Override
@@ -114,7 +116,7 @@ public class yijiantong extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Object packageContext;
-                Intent intent1=new Intent(yijiantong.this,Gesture_MainActivity.class);
+                Intent intent1=new Intent(yijiantong.this, Gesture_MainActivity.class);
                 startActivity(intent1);
 
             }

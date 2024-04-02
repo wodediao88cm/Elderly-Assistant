@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.gesture;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;

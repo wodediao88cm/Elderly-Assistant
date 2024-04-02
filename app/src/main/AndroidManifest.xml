@@ -53,13 +53,7 @@
         android:theme="@style/Theme.MyApplication"
         android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
-        <activity
-            android:name=".yuyin"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
 
         <activity
             android:name=".yijiantong"
@@ -68,13 +62,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".WNaviGuideActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".MapActivity1"
             android:exported="false">
@@ -133,28 +121,28 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".palette.PaletteView"
+            android:name=".gesture_palette.PaletteView"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".AndroidBmpUtil"
+            android:name=".gesture.AndroidBmpUtil"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".TensorFlowDetector"
+            android:name=".gesture.TensorFlowDetector"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".TensorflowResult"
+            android:name=".gesture.TensorflowResult"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -162,7 +150,7 @@
         </activity>
 
         <activity
-            android:name=".Gesture_MainActivity"
+            android:name=".gesture.Gesture_MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

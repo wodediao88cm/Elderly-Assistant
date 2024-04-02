@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.example.myapplication.palette.PaletteView
+        <com.example.myapplication.gesture_palette.PaletteView
             android:id="@+id/palette"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

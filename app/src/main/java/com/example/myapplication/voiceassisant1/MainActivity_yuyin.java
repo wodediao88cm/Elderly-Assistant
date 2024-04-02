@@ -375,7 +375,7 @@ public class MainActivity_yuyin extends Activity implements View.OnClickListener
             speak(listData.getContent());
         }
         else {
-            speakText = "我没有明白您的意思，请重复一遍，或者联系管理员425566037@qq.com";
+            speakText = "我没有明白您的意思。";
             refresh(speakText, ListData.RECEIVER);
             speak(listData.getContent());
         }

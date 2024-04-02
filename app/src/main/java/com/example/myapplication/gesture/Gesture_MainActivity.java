@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.gesture;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.palette.PaletteView;
+import com.example.myapplication.R;
+import com.example.myapplication.gesture_palette.PaletteView;
 
 import java.io.File;
 import java.io.FileOutputStream;

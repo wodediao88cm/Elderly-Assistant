@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.gesture;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -27,10 +27,9 @@ public class AndroidBmpUtil {
 	 */
 	public boolean save(Bitmap orgBitmap, String filePath){
 		
-		if(orgBitmap == null){
+		if(orgBitmap == null) {
 			return false;
 		}
-
 		if(filePath == null){
 			return false;
 		}
