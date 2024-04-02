@@ -1,49 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:id="@+id/main_one"
-        android:textColor="#FF000000"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:gravity="center_horizontal"
-        android:text="欢迎来到老人小助手"/>
 
     <Button
         android:id="@+id/button_main_1"
         android:layout_width="265dp"
-        android:layout_height="140dp"
-        android:text="一键通"
-        android:textSize="30sp"
-        android:gravity="left"></Button>
+        android:layout_height="100dp"
+        android:text="便携操作"
+        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:textSize="45sp"
+        tools:ignore="RtlHardcoded" />
+
     <Button
         android:layout_width="265dp"
         android:id="@+id/button_main_2"
-        android:layout_height="140dp"
-        android:text="健康监测"
-        android:textSize="30sp"
-        android:gravity="left"></Button>
-    <Button
-        android:layout_width="265dp"
-        android:layout_height="140dp"
-        android:id="@+id/button_main_3"
-        android:text="找寻"
-        android:textSize="30sp"
-        android:gravity="left"></Button>
-    <Button
-        android:layout_width="265dp"
-        android:layout_height="140dp"
-        android:id="@+id/button_main_4"
-        android:text="语音识别"
-        android:textSize="30sp"
-        android:gravity="left"></Button>
+        android:layout_height="100dp"
+        android:text="天气预报"
+        android:textSize="45sp"
+        android:color="#FFAB00"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal" />
 
+    <Button
+        android:layout_width="265dp"
+        android:layout_height="100dp"
+        android:id="@+id/button_main_3"
+        android:text="实时定位"
+        android:textSize="45sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:layout_width="265dp"
+        android:layout_height="100dp"
+        android:id="@+id/button_main_5"
+        android:text="摔倒检测"
+        android:textSize="45sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+    <Button
+        android:layout_width="265dp"
+        android:layout_height="100dp"
+        android:id="@+id/button_main_6"
+        android:text="运动"
+        android:textSize="45sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+    <Button
+        android:layout_width="265dp"
+        android:layout_height="100dp"
+        android:id="@+id/button_main_7"
+        android:text="AI助手"
+        android:textSize="45sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+<!--    <Button-->
+<!--        android:layout_width="265dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:id="@+id/button_main_10"-->
+<!--        android:text="语音合成"-->
+<!--        android:textSize="45sp"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_gravity="center_horizontal"/>-->
+    <Button
+        android:layout_width="265dp"
+        android:layout_height="100dp"
+        android:id="@+id/button_main_9"
+        android:text="语音助手"
+        android:textSize="45sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>
-    
+
     

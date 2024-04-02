@@ -4,22 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    */<Button
+    android:id="@+id/myitem"
+    android:layout_width="380dp"
+    android:layout_height="70dp"
+    android:text="快捷导航"
+    android:textSize="30sp"
+    android:onClick="jump"
+    android:gravity="left" />
+    */
     <Button
+        android:id="@+id/map"
         android:layout_width="380dp"
         android:layout_height="70dp"
-        android:text="选择要找寻物品的编号"
+        android:text="查看自己所在的定位"
+        android:onClick="jump"
         android:textSize="30sp"
-        android:gravity="left"></Button>
-    <Button
-        android:layout_width="380dp"
-        android:layout_height="70dp"
-        android:text="查看找寻物品的位置"
-        android:textSize="30sp"
-        android:gravity="left"></Button>
-
-
-
-
-
-
+        android:gravity="left" />
 </LinearLayout>

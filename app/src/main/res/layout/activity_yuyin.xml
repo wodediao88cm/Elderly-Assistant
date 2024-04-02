@@ -10,16 +10,25 @@
 
     <TextView
         android:id="@+id/tv_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="识别到的内容"
+        android:layout_width="269dp"
+        android:layout_height="118dp"
+        android:text=""
         android:textColor="#000" />
 
     <Button
         android:id="@+id/btn_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="271dp"
+        android:layout_height="155dp"
         android:layout_marginTop="20dp"
         android:text="开始识别" />
+
+<!--    <Button-->
+<!--        android:id="@+id/go"-->
+<!--        android:layout_width="266dp"-->
+<!--        android:layout_height="124dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="确认" />-->
+
+
 </LinearLayout>
 

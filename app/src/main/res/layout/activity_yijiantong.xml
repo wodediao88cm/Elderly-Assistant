@@ -4,56 +4,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:text="一键出示健康码"
-        android:textSize="30sp"
-        android:gravity="left"></Button>
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:text="一键出示行程码"
-        android:textSize="30sp"
-        android:gravity="left"></Button>
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:text="一键出示核酸检测报告"
-        android:textSize="30sp"
-        android:gravity="left"></Button>
+
+
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
+        android:layout_width="265dp"
         android:layout_height="70dp"
-        android:text="一键进入扫码付款界面"
-        android:textSize="30sp"
-        android:gravity="left"></Button>
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="扫码付款"
+        android:textSize="30sp"></Button>
     <Button
         android:id="@+id/button5"
         android:layout_width="265dp"
         android:layout_height="70dp"
-        android:text="一键出示付款码"
+        android:text="付款码"
         android:textSize="30sp"
-        android:gravity="left"></Button>
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"></Button>
 
     <Button
         android:id="@+id/button6"
         android:layout_width="265dp"
         android:layout_height="70dp"
-        android:text="一键出示收款码"
+        android:text="收款码"
         android:textSize="30sp"
-        android:gravity="left"></Button>
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"></Button>
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="352dp"
+        android:layout_width="265dp"
         android:layout_height="70dp"
-        android:gravity="left"
-        android:text="一键呼叫常用联系人"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:text="呼叫常用联系人"
         android:textSize="30sp"></Button>
     <Button
         android:id="@+id/button8"
@@ -61,8 +46,16 @@
         android:layout_height="70dp"
         android:text="设置常用联系人"
         android:textSize="30sp"
-        android:gravity="left"></Button>
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"></Button>
 
-
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="265dp"
+        android:layout_height="70dp"
+        android:text="手势识别"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"></Button>
 
 </LinearLayout>

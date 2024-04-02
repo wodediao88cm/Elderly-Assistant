@@ -1,28 +1,25 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
-import com.iflytek.cloud.RecognizerListener;
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
@@ -55,6 +52,8 @@ public class yuyin extends AppCompatActivity implements View.OnClickListener {
     private TextView tvResult;//识别结果
     private Button btnStart;//开始识别
     private String resultType = "json";//结果内容数据格式
+//    private Button go;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,17 +61,16 @@ public class yuyin extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_yuyin);
         tvResult = findViewById(R.id.tv_result);
         btnStart = findViewById(R.id.btn_start);
+//        go = findViewById(R.id.go);
         btnStart.setOnClickListener(this);
-
         initPermission();//权限请求
-
-
         // 使用SpeechRecognizer对象，可根据回调消息自定义界面；
         mIat = SpeechRecognizer.createRecognizer(yuyin.this, mInitListener);
         // 使用UI听写功能，请根据sdk文件目录下的notice.txt,放置布局文件和图片资源
         mIatDialog = new RecognizerDialog(yuyin.this, mInitListener);
         mSharedPreferences = getSharedPreferences("ASR",
                 Activity.MODE_PRIVATE);
+
     }
 
     @Override
@@ -87,6 +85,7 @@ public class yuyin extends AppCompatActivity implements View.OnClickListener {
         setParam(); // 设置参数
         mIatDialog.setListener(mRecognizerDialogListener);//设置监听
         mIatDialog.show();// 显示对话框
+
     }
 
 
@@ -112,7 +111,7 @@ public class yuyin extends AppCompatActivity implements View.OnClickListener {
         public void onResult(RecognizerResult results, boolean isLast) {
 
             printResult(results);//结果数据解析
-
+//            printButton(results);
         }
 
         /**
@@ -149,8 +148,141 @@ public class yuyin extends AppCompatActivity implements View.OnClickListener {
         }
 
         tvResult.setText(resultBuffer.toString());//听写结果显示
+        if(resultBuffer.toString().contains("扫码")){
+            Uri uri10 = Uri.parse("alipayqr://platformapi/startapp?saId=10000007");
+            Intent intent10 = new Intent(Intent.ACTION_VIEW, uri10);
+            startActivity(intent10);
+        }
+        else if(resultBuffer.toString().contains("付款")){
+            Uri uri10 = Uri.parse("alipayqr://platformapi/startapp?saId=20000056");
+            Intent intent10 = new Intent(Intent.ACTION_VIEW, uri10);
+            startActivity(intent10);
 
+        }
+        else if(resultBuffer.toString().contains("收款")){
+            Uri uri10 = Uri.parse("alipayqr://platformapi/startapp?saId=20000123");
+            Intent intent10 = new Intent(Intent.ACTION_VIEW, uri10);
+            startActivity(intent10);
+
+        }
+        else if(resultBuffer.toString().contains("紧急")){
+            // 从SharedPreferences中获取保存的电话号码
+            SharedPreferences preferences = getSharedPreferences("emergency_setting", MODE_PRIVATE);
+            String savedEmergencyNumber = preferences.getString("emergency_number", "");
+
+            if (!savedEmergencyNumber.isEmpty()) {
+                // 调用系统方法拨打电话
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + savedEmergencyNumber));
+                startActivity(intent);}
+        }
+        else if(resultBuffer.toString().contains("抖音")) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("snssdk1128://feed?refer=web&gd_label={{gd_label}}"));
+            startActivity(intent);
+        }
+        else if(resultBuffer.toString().contains("电话")) {
+            Intent intent = new Intent(Intent.ACTION_CALL_BUTTON);
+            startActivity(intent);
+        }
+        else if(resultBuffer.toString().contains("浏览器")) {
+            Intent intent = new Intent(Intent.ACTION_SEARCH);
+            startActivity(intent);
+        }
+        else if(resultBuffer.toString().contains("微信")) {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("weixin://"));
+            startActivity(intent);
+        }
     }
+
+
+
+//    private void printButton(RecognizerResult results) {
+//        String text = JsonParser.parseIatResult(results.getResultString());
+//
+//        String sn = null;
+//        // 读取json结果中的sn字段
+//        try {
+//            JSONObject resultJson = new JSONObject(results.getResultString());
+//            sn = resultJson.optString("sn");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//        mIatResults.put(sn, text);
+//
+//        StringBuffer resultBuffer = new StringBuffer();
+//        for (String key : mIatResults.keySet()) {
+//            resultBuffer.append(mIatResults.get(key));
+//        }
+//
+////        go.setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View view) {
+//                if(resultBuffer.toString().contains("扫码")){
+//                    Uri uri10 = Uri.parse("alipayqr://platformapi/startapp?saId=10000007");
+//                    Intent intent10 = new Intent(Intent.ACTION_VIEW, uri10);
+//                    startActivity(intent10);
+//                }
+//                else if(resultBuffer.toString().contains("付款")){
+//                    Uri uri10 = Uri.parse("alipayqr://platformapi/startapp?saId=20000056");
+//                    Intent intent10 = new Intent(Intent.ACTION_VIEW, uri10);
+//                    startActivity(intent10);
+//
+//                }
+//                else if(resultBuffer.toString().contains("收款")){
+//                    Uri uri10 = Uri.parse("alipayqr://platformapi/startapp?saId=20000123");
+//                    Intent intent10 = new Intent(Intent.ACTION_VIEW, uri10);
+//                    startActivity(intent10);
+//
+//                }
+//                else if(resultBuffer.toString().contains("打电话")){
+//                    // 从SharedPreferences中获取保存的电话号码
+//                    SharedPreferences preferences = getSharedPreferences("emergency_setting", MODE_PRIVATE);
+//                    String savedEmergencyNumber = preferences.getString("emergency_number", "");
+//
+//                    if (!savedEmergencyNumber.isEmpty()) {
+//                        // 调用系统方法拨打电话
+//                        Intent intent = new Intent();
+//                        intent.setAction(Intent.ACTION_CALL);
+//                        intent.setData(Uri.parse("tel:" + savedEmergencyNumber));
+//                        startActivity(intent);}
+//                }
+//                else if(resultBuffer.toString().contains("便携") || resultBuffer.toString().contains("操作") ){
+//                    Intent intent1=new Intent(yuyin.this,yijiantong.class);
+//                    startActivity(intent1);
+//
+//                }
+//                else if(resultBuffer.toString().contains("定位") || resultBuffer.toString().contains("位置") ){
+//                    Intent intent1=new Intent(yuyin.this,zhaoxun.class);
+//                    startActivity(intent1);
+//                }
+//                else if(resultBuffer.toString().contains("天气")){
+//                    Intent intent1=new Intent(yuyin.this, MainActivity1.class);
+//                    startActivity(intent1);
+//                }
+//                else if(resultBuffer.toString().contains("运动")){
+//                    Intent intent1=new Intent(yuyin.this, step.class);
+//                    startActivity(intent1);
+//                }
+//                else if(resultBuffer.toString().contains("AI")|| resultBuffer.toString().contains("助手") ){
+//                    Intent intent1=new Intent(yuyin.this, xunfei.class);
+//                    startActivity(intent1);
+//                }
+//                else if(resultBuffer.toString().contains("手势") || resultBuffer.toString().contains("识别") ){
+//                    Intent intent1=new Intent(yuyin.this, Gesture_MainActivity.class);
+//                    startActivity(intent1);
+//                }
+//                else if(resultBuffer.toString().contains("摔倒") || resultBuffer.toString().contains("检测") ){
+//                    Intent intent1=new Intent(yuyin.this, fall_detection.class);
+//                    startActivity(intent1);
+//                }
+//            }
+//            });
+
+
+//
+//    }
 
     /**
      * 参数设置
