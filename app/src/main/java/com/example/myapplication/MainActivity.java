@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.Fall_fec.fall_detection;
 import com.example.myapplication.voiceassisant1.MainActivity_yuyin;
 import com.example.myapplication.weather.MainActivity1;
 
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         button_main_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1=new Intent(MainActivity.this,yijiantong.class);
+                Intent intent1=new Intent(MainActivity.this, quickoperation.class);
                 startActivity(intent1);
 
             }

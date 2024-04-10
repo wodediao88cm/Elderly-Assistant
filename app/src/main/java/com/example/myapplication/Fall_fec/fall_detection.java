@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Fall_fec;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -30,6 +30,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.myapplication.GlobalData;
+import com.example.myapplication.R;
 import com.example.myapplication.ml.FallModel1;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -75,7 +77,7 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.falldetection);
 
 
 
@@ -163,8 +165,6 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
     }
 
 
-
-
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         accX = sensorEvent.values[0]; // 获取X轴的加速度值
@@ -211,12 +211,9 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
             //TextView tx = findViewById(R.id.text);
             if (output[0]<0.6){
 
-                //t.setText(String.valueOf(output[0])+" Fall");
-
                 AlertSet();
 
                 sensorManager.unregisterListener(this);
-                //startactivity();
 
 
 

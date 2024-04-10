@@ -4,7 +4,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,6 +43,16 @@ public class emergency_number extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+            }
+        });
+        Button button_save =findViewById(R.id.button_sava);
+        button_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    // 提示用户输入有效的紧急电话号码
+                    Toast.makeText(emergency_number.this, "保存成功", Toast.LENGTH_SHORT).show();
+
             }
         });
     }}

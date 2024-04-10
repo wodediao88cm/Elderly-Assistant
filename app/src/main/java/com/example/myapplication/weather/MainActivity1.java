@@ -14,7 +14,7 @@ public class MainActivity1 extends SingleFragmentActivity implements WeatherFrag
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_masterdetail;
+        return R.layout.weather_splicesheet;
     }
 
     @Override
@@ -22,15 +22,8 @@ public class MainActivity1 extends SingleFragmentActivity implements WeatherFrag
         return R.id.fragment_container;
     }
 
-    public void onWeatherSelected(WeatherItem weatherItem){   //平板中选中天气
-        if(findViewById(R.id.detail_container)==null){
-            Intent intent = WeatherDetailActivity.newIntent(this,weatherItem);
-            startActivity(intent);
-        }else{
-            Fragment newDetail = WeatherDetailFragment.newInstance(weatherItem);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.detail_container,newDetail)
-                    .commit();
-        }
+    public void onWeatherSelected(WeatherItem weatherItem){
+        Intent intent = WeatherDetailActivity.newIntent(this, weatherItem);
+        startActivity(intent);
     }
 }

@@ -15,15 +15,14 @@ public class WeatherDetailActivity extends SingleFragmentActivity{
         WeatherItem weatherItem = (WeatherItem)getIntent().getSerializableExtra(EXTRA_WEATHER_ITEM);
         return WeatherDetailFragment.newInstance(weatherItem);
     }
-
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_detail;
+        return R.layout.weather_splicesheet;
     }
 
     @Override
     protected int getFragmentId() {
-        return R.id.detail_container;
+        return R.id.fragment_container;
     }
 
     public static Intent newIntent(Context packageContext, WeatherItem weatherItem){

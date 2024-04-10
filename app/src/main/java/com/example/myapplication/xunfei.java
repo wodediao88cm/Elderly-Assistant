@@ -27,6 +27,7 @@ import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechRecognizer;
+import com.iflytek.cloud.SpeechUtility;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.iflytek.sparkchain.core.LLM;
@@ -124,8 +125,11 @@ public class xunfei extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bigmoudle_xunfei);
+        SpeechUtility.createUtility(xunfei.this, "appid=85f780f1");
+
         tvResult = findViewById(R.id.chat_input_text);
         btnStart = findViewById(R.id.chat_speak_btn);
         initView();

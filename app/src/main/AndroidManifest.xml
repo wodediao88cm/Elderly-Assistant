@@ -47,7 +47,6 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".SpeechApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
@@ -56,7 +55,7 @@
 
 
         <activity
-            android:name=".yijiantong"
+            android:name=".quickoperation"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -100,21 +99,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Contract"
+            android:name=".Fall_fec.Contract"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Dbhelper"
+            android:name=".Fall_fec.Dbhelper"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".fall_detection"
+            android:name=".Fall_fec.fall_detection"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -127,13 +126,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".gesture.AndroidBmpUtil"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".gesture.TensorFlowDetector"
             android:exported="false">
@@ -181,7 +174,6 @@
         <activity android:name="com.example.myapplication.weather.MainActivity1"/>
         <activity android:name="com.example.myapplication.weather.WeatherDetailActivity"/>
         <activity android:name="com.example.myapplication.weather.SettingActivity"/>
-        <service android:name="com.example.myapplication.weather.NotificationService"/>
     </application>
 
 </manifest>

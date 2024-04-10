@@ -17,18 +17,23 @@ import java.util.List;
 //获取JSON数组
 //解析JSON数组，变成WeatherItem的数组形式
 
+/**
+ * 根据您提供的代码，这是一个用于从 Flickr API 获取天气数据的 FlickFetcher 类。让我来帮助您解释一下这段代码：
+ *
+ * getUrlBytes 方法用于从指定的 URL 地址获取数据并以字节数组的形式返回。它使用了HttpURLConnection` 来进行网络连接，并处理了连接状态等操作。
+ * getUrlString 方法则是将 getUrlBytes 方法获取的字节数组转换为字符串并返回。
+ * fetchItems 方法用于从指定的 URL 获取天气数据，并将返回的 JSON 数据解析成 WeatherItem 对象的 List。它使用了 getUrlString 方法来获取 JSON 数据，并调用 parseItems 方法将 JSON 数据解析成 WeatherItem 对象。
+ * fetchCity 方法似乎用于获取城市的一些信息，它也使用了 getUrlString 方法来获取 JSON 数据，并解析出城市的信息。
+ * 总体而言，这段代码看起来是在使用 Flickr API 获取天气数据，并且将 JSON 数据解析成 WeatherItem 对象。同时也包含了一些日志记录和异常处理。
+ *
+ * 如果您有任何其他问题，或者需要进一步解释，请随时告诉我。我会很乐意为您提供帮助。
+ */
 public class FlickrFetcher {
     public static final String TAG = "FlickrFetcher";
 
     public byte[] getUrlBytes(String urlSpec) throws Exception{
         URL url = new URL(urlSpec);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//        connection.setInstanceFollowRedirects(false);    //跟踪重定向
-//        String redirect = connection.getHeaderField("Location");
-//        if (redirect != null){
-//            connection = (HttpURLConnection)new URL(redirect).openConnection();
-//        }
-
         try{
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             InputStream in = connection.getInputStream();
@@ -75,9 +80,6 @@ public class FlickrFetcher {
             JSONObject jsonBody = new JSONObject(jsonString);
             JSONArray locationJsonArray = jsonBody.getJSONArray("location");
             jsonObject = locationJsonArray.getJSONObject(0);
-//            locationID = locationJsonArray.getJSONObject(0).getString("id");
-//            String lat = locationJsonArray.getJSONObject(0).getString("lat");
-//            String lon = locationJsonArray.getJSONObject(0).getString("lon");
         }catch (Exception e){
             Log.i(TAG,"Failed!"+e);
         }

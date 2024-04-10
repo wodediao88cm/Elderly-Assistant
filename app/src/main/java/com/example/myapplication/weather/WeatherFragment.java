@@ -1,5 +1,6 @@
 package com.example.myapplication.weather;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,7 +10,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +29,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.GlobalData;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.quickoperation;
 
 import org.json.JSONObject;
 
@@ -130,12 +132,6 @@ public class WeatherFragment extends Fragment {
             new FetchItemsTask().execute();  //异步执行，获取网站上的json内容
             return;
         }
-        if (send=="是"){
-            //开启后台服务，启动定时器，发送通知消息
-            NotificationService.setServiceAlarm(getActivity(),true);
-        }else{
-            NotificationService.setServiceAlarm(getActivity(),false);
-        }
     }
 
     @Override
@@ -160,11 +156,6 @@ public class WeatherFragment extends Fragment {
     //获取drawable图标资源的id
     public int getIconId(Context mContext, String icon){
         int i=  getResources().getIdentifier(icon, "drawable", mContext.getPackageName()) ;
-        if(i>0){
-            //Log.i(TAG,"Success to get drawable resoure");
-        }else{
-            Log.i(TAG,"Fail to get drawable resoure");
-        }
         return i;
     }
 
@@ -176,6 +167,7 @@ public class WeatherFragment extends Fragment {
         String unit = pref.getString("unit","摄氏度");
         String city_url = "https://geoapi.qweather.com/v2/city/lookup?location="+city+"&key=6b01a87a7f3347a19c7b6b84f2ba35e3";
 
+        @SuppressLint("Range")
         @Override
         protected List<WeatherItem> doInBackground(Void... voids) {
             List<WeatherItem> weatherItems = new ArrayList<>();
@@ -206,7 +198,6 @@ public class WeatherFragment extends Fragment {
             }
 
             //有网络
-            //String locationID = new FlickrFetcher().fetchCity(city_url);
             JSONObject jsonObject = new FlickrFetcher().fetchCity(city_url);
             String locationID = "";
             try{
@@ -271,10 +262,6 @@ public class WeatherFragment extends Fragment {
             //实现recyclerview部分的UI
             setupAdapter();
 
-            //如果是ipad，就手动更新详情页面
-            if(getActivity().findViewById(R.id.detail_container)!=null){
-                mCallbacks.onWeatherSelected(item);
-            }
         }
     }
 
@@ -315,6 +302,7 @@ public class WeatherFragment extends Fragment {
         //点击列表，跳转到详情页面
         @Override
         public void onClick(View v) {
+
             Log.i(TAG,"click");
             mCallbacks.onWeatherSelected(mWeatherItem);
         }
@@ -345,10 +333,10 @@ public class WeatherFragment extends Fragment {
             WeatherItem weatherItem = mWeatherList.get(position);
             holder.bindWeatherItem(weatherItem);
             if(position==0){
-                holder.setDay("Today");
+                holder.setDay("今天");
             }
             if(position==1){
-                holder.setDay("Tomorrow");
+                holder.setDay("明天");
             }
         }
     }

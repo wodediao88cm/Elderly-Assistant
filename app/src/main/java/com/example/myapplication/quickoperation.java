@@ -14,16 +14,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.gesture.Gesture_MainActivity;
 
-public class yijiantong extends AppCompatActivity {
+public class quickoperation extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_yijiantong);
+        setContentView(R.layout.quickoperation);
         if (shouldAskPermissions()) {
             askPermissions();
         }
-
         Button button4 = findViewById(R.id.button4);
         //点击
         button4.setOnClickListener(new View.OnClickListener() {
@@ -32,11 +31,8 @@ public class yijiantong extends AppCompatActivity {
                 Uri uri = Uri.parse("alipayqr://platformapi/startapp?saId=10000007");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
-
             }
         });
-
-
         Button button5 = findViewById(R.id.button5);
         //点击
         button5.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +41,6 @@ public class yijiantong extends AppCompatActivity {
                 Uri uri1 = Uri.parse("alipayqr://platformapi/startapp?saId=20000056");
                 Intent intent1 = new Intent(Intent.ACTION_VIEW, uri1);
                 startActivity(intent1);
-
             }
         });
         Button button6 = findViewById(R.id.button6);
@@ -64,18 +59,7 @@ public class yijiantong extends AppCompatActivity {
         button8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent addIntent = new Intent(Intent.ACTION_INSERT, Uri.withAppendedPath(Uri.parse("content://com.android.contacts"), "contacts"));
-//                addIntent.setType("vnd.android.cursor.dir/person");
-//                addIntent.setType("vnd.android.cursor.dir/contact");
-//                addIntent.setType("vnd.android.cursor.dir/raw_contact");
-//                boolean number = false;
-//                addIntent.putExtra(ContactsContract.Intents.Insert.NAME, number);
-//
-//                boolean numberForNewConstant = false;
-//                addIntent.putExtra(android.provider.ContactsContract.Intents.Insert.PHONE, numberForNewConstant);
-//                startActivity(addIntent);
-                Object packageContext;
-                Intent intent3=new Intent(yijiantong.this,emergency_number.class);
+                Intent intent3=new Intent(quickoperation.this,emergency_number.class);
                 startActivity(intent3);
             }
         });
@@ -83,11 +67,6 @@ public class yijiantong extends AppCompatActivity {
         EditText emergencyNumberEditText = view.findViewById(R.id.emergency_number);
         String emergencyNumber = emergencyNumberEditText.getText().toString();
 
-
-//// 保存电话号码到SharedPreferences
-//        SharedPreferences.Editor editor = getSharedPreferences("emergency_setting", MODE_PRIVATE).edit();
-//        editor.putString("emergency_number", emergencyNumber);
-//        editor.apply();
 
 // 绑定拨号按钮
         Button button7 = findViewById(R.id.button7);
@@ -106,7 +85,7 @@ public class yijiantong extends AppCompatActivity {
                     startActivity(intent);
                 }else {
                     // 提示用户输入有效的紧急电话号码
-                    Toast.makeText(yijiantong.this, "请先输入有效的紧急电话号码", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(quickoperation.this, "请先输入有效的紧急电话号码", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -116,7 +95,7 @@ public class yijiantong extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Object packageContext;
-                Intent intent1=new Intent(yijiantong.this, Gesture_MainActivity.class);
+                Intent intent1=new Intent(quickoperation.this, Gesture_MainActivity.class);
                 startActivity(intent1);
 
             }

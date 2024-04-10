@@ -20,28 +20,25 @@ import com.example.myapplication.R;
 public class SettingActivity extends AppCompatActivity {
     private EditText location;
     private TextView unit_text;
-    private TextView send_text;
     private LinearLayout page;
     private LinearLayout unit;
-    private LinearLayout send;
     private String city;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.weather_setting);
 
         location = (EditText) findViewById(R.id.location);
         unit = (LinearLayout)findViewById(R.id.unit);
         page = (LinearLayout)findViewById(R.id.page);
         unit_text = (TextView)findViewById(R.id.unit_text);
-        send = (LinearLayout)findViewById(R.id.send);
-        send_text = (TextView)findViewById(R.id.send_text);
+
 
         SharedPreferences pref = getSharedPreferences("setting",MODE_PRIVATE);
-        location.setText(pref.getString("city","北京"));
+        location.setText(pref.getString("city","天津"));
         unit_text.setText(pref.getString("unit","摄氏度"));
-        send_text.setText(pref.getString("send","是"));
+
 
         page.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -74,11 +71,6 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
-        send.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                click2();
-            }
-        });
     }
 
     //点击按钮弹出一个单选对话框
@@ -106,27 +98,5 @@ public class SettingActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public void click2() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("请选择是否开启通知");
-        final String items[] = {"是","否"};
 
-//-1代表没有条目被选中
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //1.把选中的条目取出来
-                String item = items[which];
-                Toast.makeText(getApplicationContext(),item.toString(),Toast.LENGTH_LONG).show();
-                send_text.setText(item.toString());
-                SharedPreferences.Editor editor = getSharedPreferences("setting",MODE_PRIVATE).edit();
-                editor.putString("send",item.toString());
-                editor.commit();
-                //2.然后把对话框关闭
-                dialog.dismiss();
-            }
-        });
-//一样要show
-        builder.show();
-    }
 }

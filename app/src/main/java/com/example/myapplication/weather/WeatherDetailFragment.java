@@ -86,9 +86,9 @@ public class WeatherDetailFragment extends Fragment {
         int id = getIconId(getContext(),icon);
         Drawable drawable = getResources().getDrawable(id);
         mDetialIcon.setImageDrawable(drawable);
-        mDetailHumidity.setText("Humidity: "+mWeatherItem.getHumidity()+" %");
-        mDetailPressure.setText("Pressure: "+mWeatherItem.getPressure()+" hPa");
-        mDetailWind.setText("Wind: "+mWeatherItem.getWind()+" km/h SE");
+        mDetailHumidity.setText("湿度："+mWeatherItem.getHumidity()+" %");
+        mDetailPressure.setText("气压："+mWeatherItem.getPressure()+" hPa");
+        mDetailWind.setText("风速："+mWeatherItem.getWind()+" km/h ");
         mDetailDesc.setText(mWeatherItem.getText());
 
         return v;
@@ -97,11 +97,11 @@ public class WeatherDetailFragment extends Fragment {
     public String createMessage(){
         String message = "";
         message += "今天的天气状况为："+mWeatherItem.getText();
-        message += "    今天的最高温度是： "+mWeatherItem.getMax_temp();
-        message += "    今天的最低温度是： "+mWeatherItem.getMin_temp();
-        message += "    今天的湿度为： "+mWeatherItem.getHumidity();
-        message += "    今天的风速为："+mWeatherItem.getWind();
-        message += "    今天的气压为："+mWeatherItem.getPressure();
+        message += "    今天的最高温度是： "+mWeatherItem.getMax_temp()+"度";
+        message += "    今天的最低温度是： "+mWeatherItem.getMin_temp()+"度";
+        message += "    今天的湿度为： "+mWeatherItem.getHumidity()+"%";
+        message += "    今天的风速为："+mWeatherItem.getWind()+"km/h";
+        message += "    今天的气压为："+mWeatherItem.getPressure()+"hpa";
         message += "    希望您拥有美好的一天!";
         return message;
     }
@@ -109,9 +109,7 @@ public class WeatherDetailFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        if(getActivity().findViewById(R.id.fragment_container)==null){    //是手机模式
-            inflater.inflate(R.menu.fragment_detail,menu);
-        }
+        inflater.inflate(R.menu.fragment_detail,menu);
     }
 
     @Override

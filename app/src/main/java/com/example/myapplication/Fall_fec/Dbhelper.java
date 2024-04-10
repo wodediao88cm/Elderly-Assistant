@@ -1,11 +1,11 @@
-package com.example.myapplication;
+package com.example.myapplication.Fall_fec;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.myapplication.Contract.ContactEntry;
+import com.example.myapplication.Fall_fec.Contract.ContactEntry;
 
 public class Dbhelper extends SQLiteOpenHelper {
 

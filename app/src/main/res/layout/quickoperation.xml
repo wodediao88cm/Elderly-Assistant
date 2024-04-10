@@ -38,13 +38,13 @@
         android:layout_height="70dp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:text="呼叫常用联系人"
+        android:text="呼叫紧急联系人"
         android:textSize="30sp"></Button>
     <Button
         android:id="@+id/button8"
         android:layout_width="265dp"
         android:layout_height="70dp"
-        android:text="设置常用联系人"
+        android:text="设置紧急联系人"
         android:textSize="30sp"
         android:gravity="center"
         android:layout_gravity="center_horizontal"></Button>
