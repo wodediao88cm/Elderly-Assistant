@@ -29,9 +29,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.GlobalData;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.quickoperation;
 
 import org.json.JSONObject;
 
@@ -87,15 +85,11 @@ public class WeatherFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences.Editor editor = getActivity().getSharedPreferences("setting",Context.MODE_PRIVATE).edit();
-        setRetainInstance(true);
-
         //设置其他选项，让manager知道fragment替activity进行处理
         setHasOptionsMenu(true);
-
         //创建数据库
         mDatabase = new DatabaseHelper(getActivity()).getWritableDatabase();
-
-        new FetchItemsTask().execute();  //异步执行，获取网站上的json内容
+        new FetchItemsTask();  //异步执行，获取网站上的json内容
     }
 
     @Nullable
@@ -163,7 +157,7 @@ public class WeatherFragment extends Fragment {
     private class FetchItemsTask extends AsyncTask<Void,Void, List<WeatherItem>> {
         SharedPreferences.Editor editor = getActivity().getSharedPreferences("setting",Context.MODE_PRIVATE).edit();
         SharedPreferences pref = getActivity().getSharedPreferences("setting",Context.MODE_PRIVATE);
-        String city = pref.getString("city","北京");
+        String city = pref.getString("city","天津");
         String unit = pref.getString("unit","摄氏度");
         String city_url = "https://geoapi.qweather.com/v2/city/lookup?location="+city+"&key=6b01a87a7f3347a19c7b6b84f2ba35e3";
 

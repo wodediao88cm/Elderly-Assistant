@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.AI.xunfeiAI;
 import com.example.myapplication.Fall_fec.fall_detection;
 import com.example.myapplication.voiceassisant1.MainActivity_yuyin;
 import com.example.myapplication.weather.MainActivity1;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Object packageContext;
-                Intent intent3=new Intent(MainActivity.this,MapActivity1.class);
+                Intent intent3=new Intent(MainActivity.this, Map_Activity.class);
                 startActivity(intent3);
 
             }
@@ -86,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Object packageContext;
-                Intent intent1=new Intent(MainActivity.this,xunfei.class);
+                Intent intent1=new Intent(MainActivity.this, xunfeiAI.class);
                 startActivity(intent1);
 
             }

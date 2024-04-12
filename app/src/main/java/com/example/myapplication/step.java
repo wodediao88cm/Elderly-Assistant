@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +35,7 @@ public class step extends AppCompatActivity {
     private MySensorEventListener mListener;
     private int mStepDetector = 0;  // 自应用运行以来STEP_DETECTOR检测到的步数
     private int mStepCounter = 0;   // 自系统开机以来STEP_COUNTER检测到的步数
-
+    private Button Button_reset;
     public static Intent buildIntent(Context context) {
         Intent intent = new Intent(context, step.class);
         if (!(context instanceof Activity)) {
@@ -46,7 +48,7 @@ public class step extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.step);
-
+        Button_reset = findViewById(R.id.Button_reset);
         mStepText = (TextView) findViewById(R.id.stepText);
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mListener = new MySensorEventListener();
@@ -60,6 +62,17 @@ public class step extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, ACTIVITY_RECOGNITION_PERMISSION, 321);
             }
         }
+        Button_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mStepDetector = 0;
+                GlobalData.getInstance().setStepCount(mStepDetector);
+//                String desc = String.format(Locale.CHINESE, "设备检测到您当前走了%d步,现在走了：%d步", mStepCounter, mStepDetector);
+                String desc = String.format(Locale.CHINESE, "您已经走了：%d步 \n  路程：" +
+                        "%.3f km  \n  消耗卡路里：%.3f ", mStepDetector,0.5*mStepDetector*0.001,0.5*mStepDetector*0.001*67);
+                mStepText.setText(desc);
+            }
+        });
     }
 
     @Override
@@ -73,11 +86,11 @@ public class step extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mSensorManager.unregisterListener(mListener);
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        mSensorManager.unregisterListener(mListener);
+//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -109,6 +122,7 @@ public class step extends AppCompatActivity {
     private class MySensorEventListener implements SensorEventListener {
         @Override
         public void onSensorChanged(SensorEvent event) {
+            mStepDetector = GlobalData.getInstance().getStepcount();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 System.out.println("@@@:" + event.sensor.getType() + "--" + Sensor.TYPE_STEP_DETECTOR + "--" + Sensor.TYPE_STEP_COUNTER);
 
@@ -119,15 +133,15 @@ public class step extends AppCompatActivity {
                 } else if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
                     mStepCounter = (int) event.values[0];
                 }
-
-                String desc = String.format(Locale.CHINESE, "设备检测到您当前走了%d步", mStepCounter);
+                String desc = String.format(Locale.CHINESE, "您已经走了：%d步 \n  路程：" +
+                        "%.3f km  \n  消耗卡路里：%.3f ", mStepDetector,0.5*mStepDetector*0.001,0.5*mStepDetector*0.001*67);
                 mStepText.setText(desc);
             }
+            GlobalData.getInstance().setStepCount(mStepDetector);
         }
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
     }
-
 }

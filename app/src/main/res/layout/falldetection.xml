@@ -17,8 +17,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        app:itemIconTint="@drawable/selector"
-        app:itemTextColor="@drawable/selector"
          />
 
 
@@ -26,19 +24,17 @@
         android:id="@+id/imageView"
         android:layout_width="319dp"
         android:layout_height="235dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+
+        android:layout_gravity="center_horizontal"
         android:layout_marginStart="41dp"
         android:layout_marginTop="12dp"
         app:srcCompat="@drawable/fall_img" />
 
 
-
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="180dp"
-        android:layout_height="38dp"
+        android:layout_width="231dp"
+        android:layout_height="110dp"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"

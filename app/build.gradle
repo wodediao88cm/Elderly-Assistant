@@ -54,8 +54,7 @@ dependencies {
     implementation files('libs/SparkChain.aar')
     implementation 'com.google.code.gson:gson:2.6.2'
     implementation 'org.tensorflow:tensorflow-android:1.13.1'
-    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'
-    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'
+
 
 
 }

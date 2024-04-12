@@ -9,6 +9,7 @@ public class GlobalData extends AppCompatActivity {
     private String min_temp;
     private String max_temp;
     private String IconDesc;
+    private int StepCount;
     private GlobalData() {
         // 私有构造函数
     }
@@ -50,5 +51,13 @@ public class GlobalData extends AppCompatActivity {
 
     public void setIconDesc(String IconDesc) {
         this.IconDesc = IconDesc;
+    }
+
+    public int getStepcount() {
+        return StepCount;
+    }
+
+    public void setStepCount(int StepCount) {
+        this.StepCount = StepCount;
     }
 }

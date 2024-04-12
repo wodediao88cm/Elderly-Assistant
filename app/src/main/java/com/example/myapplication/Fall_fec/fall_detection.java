@@ -11,12 +11,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.LocationRequest;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Vibrator;
 import android.telephony.SmsManager;
 import android.view.View;
@@ -32,15 +30,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.GlobalData;
 import com.example.myapplication.R;
-import com.example.myapplication.ml.FallModel1;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.tensorflow.lite.DataType;
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -49,40 +39,24 @@ import java.util.TimerTask;
 public class fall_detection extends AppCompatActivity implements SensorEventListener  {
 
     private SensorManager sensorManager;
-    //public Adapter mAdapter;
-    private LocationRequest locationRequest;
+
     private Sensor sensor;
-    private TextView tv,tv1,tv2;
+    private TextView tv1;
     private Button bt, bt1;
     private  float accX;
     private  float accY;
     private  float accZ;
     private static final String TAG = fall_detection.class.getSimpleName();
-    float[] values = new float[1203];
     AlertDialog.Builder builder;
-    private AlertDialog alertDialog;
     private Vibrator vibrate;
-    private long lastAccelTime = 0;
-    private Timer timer;
-    private Handler handler;
-    private int count=1;
     private int i=0,j=0;
     public boolean starting=true;
-    private Dbhelper Dbhelper;
-    private BottomNavigationView bottomNavigationView;
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.falldetection);
-
-
-
-
-
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true);
             setTurnScreenOn(true);
@@ -106,8 +80,7 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
         bt = findViewById(R.id.button);
         bt1 = findViewById(R.id.button_call);
         tv1 = findViewById(R.id.textView1);
-        //tv2 = findViewById(R.id.txt4);
-        bottomNavigationView=findViewById(R.id.bottom_navigation);
+
 
 
 //拨打电话
@@ -171,78 +144,43 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
         accY = sensorEvent.values[1]; // 获取Y轴的加速度值
         accZ = sensorEvent.values[2]; // 获取Z轴的加速度值
 
-        values[i] = accX; // 将X轴加速度值存入values数组
-        values[i + 1] = accY; // 将Y轴加速度值存入values数组
-        values[i + 2] = accZ; // 将Z轴加速度值存入values数组
-        i += 3; // 更新索引值
+        RunModel(accX,accY,accZ);
 
-        if (i >= 1202) { // 如果已经收集了足够多的数据
-            i = 0; // 重置索引值
-            RunModel(values); // 传入收集的加速度值数组，执行模型运行方法
-        }
+    }
+    private void RunModel(float x,float y,float z){
+        double SVM = Math.sqrt(x*x+y*y+z*z);
+        if(SVM >110)
+        {
+            AlertSet();
+            sensorManager.unregisterListener(this);}
+
+
     }
 
-    private void RunModel(float[] values) {
-        try {
-            FallModel1 model = FallModel1.newInstance(fall_detection.this);
-            ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * 401 * 3);
-
-            byteBuffer.order(ByteOrder.nativeOrder());
-            for (int f=0; f<1200;f+=3){
-                //an error here to fix related to java.nio.BufferOverflowException
-                byteBuffer.putFloat(values[f]);
-                byteBuffer.putFloat(values[1+f]);
-                byteBuffer.putFloat(values[2+f]);
-            }
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 401, 3}, DataType.FLOAT32);
-            inputFeature0.loadBuffer(byteBuffer);
-
-            // Runs model inference and gets result.
-            FallModel1.Outputs outputs = model.process(inputFeature0);
-            TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-
-            // Releases model resources if no longer used.
-            float[] output = outputFeature0.getFloatArray();
-            model.close();
-            //TextView t = findViewById(R.id.txt);
-
-
-
-            //TextView tx = findViewById(R.id.text);
-            if (output[0]<0.6){
-
-                AlertSet();
-
-                sensorManager.unregisterListener(this);
-
-
-
-            }
-
-
-
-        } catch ( IOException e) {
-            // TODO Handle the exception
-        }
+    @Override
+    protected void onResume() {
+        sensorManager.registerListener(fall_detection.this, sensor,SensorManager.SENSOR_DELAY_FASTEST);
+        bt.setText("暂停检测");
+        j=1;
+        super.onResume();
     }
-
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
 
 
     @SuppressLint("HandlerLeak")
     private void AlertSet() {
         MediaPlayer player ;
         player = MediaPlayer.create(this,R.raw.ringtone);
-        //isAlertset();
         vibrate = (Vibrator) getSystemService(VIBRATOR_SERVICE);//震动
         Timer timer = new Timer();
         if (starting == true  ){
             addRingtone(player);
             setVibrate();
-            //starting = false;
         }
-
-
 
         builder = new AlertDialog.Builder(this);
         builder.setTitle("是否发生跌倒？");
@@ -252,14 +190,11 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                //Call the contact
-
                         vibrate.cancel();
                         timer.cancel();
                         stopRingtone(player);
-                        //getLocation();
                         SendSMS();
-                sensorManager.registerListener(fall_detection.this, sensor,SensorManager.SENSOR_DELAY_FASTEST);
+                        sensorManager.registerListener(fall_detection.this, sensor,SensorManager.SENSOR_DELAY_FASTEST);
 
 
 
@@ -275,44 +210,35 @@ public class fall_detection extends AppCompatActivity implements SensorEventList
                 dialogInterface.cancel();
                 sensorManager.registerListener(fall_detection.this, sensor,SensorManager.SENSOR_DELAY_FASTEST);
 
-
             }
         });
         final AlertDialog alertDialog=builder.create();
         TimerTask timerTask = new TimerTask() {
             int countTime = 45;
+
             @Override
+
             public void run() {
                 if (countTime > 0){
 
-                    alertDialog.setMessage("拒绝或确认发生跌倒: \n" +
-                            "倒计时结束后将自动发送短信!!\n"+ countTime );
                     countTime --;
 
-
                 }else{
-
-                    //getLocation();
                     timer.cancel();
                     alertDialog.cancel();
                     vibrate.cancel();
                     stopRingtone(player);
-
-                    sensorManager.unregisterListener(fall_detection.this);
-
-
-
+                    SendSMS();
+                    sensorManager.registerListener(fall_detection.this, sensor,SensorManager.SENSOR_DELAY_FASTEST);
+//                    sensorManager.unregisterListener(fall_detection.this);
                 }
-
-
-
             }
+
 
         };
         //timerTask.cancel();
         timer.schedule(timerTask, 100, 1000);
         alertDialog.show();
-
     }
 
 

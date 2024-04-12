@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.AI;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

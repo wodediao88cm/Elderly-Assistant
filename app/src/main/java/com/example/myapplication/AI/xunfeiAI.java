@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.AI;
 
 import android.Manifest;
 import android.app.Activity;
@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.myapplication.R;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.RecognizerResult;
@@ -46,7 +47,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-public class xunfei extends AppCompatActivity {
+public class xunfeiAI extends AppCompatActivity {
     private static final String TAG = "AEE";
     private Button startChatBtn;
     private TextView chatText;
@@ -127,8 +128,8 @@ public class xunfei extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bigmoudle_xunfei);
-        SpeechUtility.createUtility(xunfei.this, "appid=85f780f1");
+        setContentView(R.layout.xunfei_ai);
+        SpeechUtility.createUtility(xunfeiAI.this, "appid=85f780f1");
 
         tvResult = findViewById(R.id.chat_input_text);
         btnStart = findViewById(R.id.chat_speak_btn);
@@ -139,9 +140,9 @@ public class xunfei extends AppCompatActivity {
         // tvResult1=findViewById(R.id.tv_result1);
         initPermission();//权限请求
         // 使用SpeechRecognizer对象，可根据回调消息自定义界面；
-        mIat = SpeechRecognizer.createRecognizer(xunfei.this, mInitListener);
+        mIat = SpeechRecognizer.createRecognizer(xunfeiAI.this, mInitListener);
         // 使用UI听写功能，请根据sdk文件目录下的notice.txt,放置布局文件和图片资源
-        mIatDialog = new RecognizerDialog(xunfei.this, mInitListener);
+        mIatDialog = new RecognizerDialog(xunfeiAI.this, mInitListener);
         mSharedPreferences = getSharedPreferences("ASR",
                 Activity.MODE_PRIVATE);
 
@@ -292,7 +293,7 @@ public class xunfei extends AppCompatActivity {
      * @param msg
      */
     private void showMsg(String msg) {
-        Toast.makeText(xunfei.this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(xunfeiAI.this, msg, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -372,11 +373,11 @@ public class xunfei extends AppCompatActivity {
         int ret = SparkChain.getInst().init(getApplicationContext(),sparkChainConfig);
         if(ret == 0){
             Log.d(TAG,"SDK初始化成功：" + ret);
-            showToast(xunfei.this, "SDK初始化成功：" + ret);
+            showToast(xunfeiAI.this, "SDK初始化成功：" + ret);
             setLLMConfig();
         }else{
             Log.d(TAG,"SDK初始化失败：其他错误:" + ret);
-            showToast(xunfei.this, "SDK初始化失败-其他错误：" + ret);
+            showToast(xunfeiAI.this, "SDK初始化失败-其他错误：" + ret);
         }
     }
 
@@ -390,7 +391,7 @@ public class xunfei extends AppCompatActivity {
         String usrInputText = inputText.getText().toString();
         Log.d(TAG,"用户输入：" + usrInputText);
         if(usrInputText.length() >= 1)
-            chatText.append("\n输入:\n    " + usrInputText  + "\n");
+            chatText.append("\n用户:\n    " + usrInputText  + "\n");
 
         String myContext = "myContext";
 
@@ -404,7 +405,7 @@ public class xunfei extends AppCompatActivity {
             @Override
             public void run() {
                 inputText.setText("");
-                chatText.append("输出:\n    ");
+                chatText.append("AI助手:\n    ");
             }
         });
 
@@ -424,7 +425,7 @@ public class xunfei extends AppCompatActivity {
                     startChat();
                     toend();
                 } else {
-                    Toast.makeText(xunfei.this, "Busying! Please Wait", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(xunfeiAI.this, "Busying! Please Wait", Toast.LENGTH_SHORT).show();
                 }
             }
         });
